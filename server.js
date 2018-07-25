@@ -11,5 +11,5 @@ app.get('/login',(req,res)=>{
 });
 
 app.listen(800,()=>{
-	console.log('Server is Activated!');
+	console.log('Server is Activated to 800 sdport!');
 });
