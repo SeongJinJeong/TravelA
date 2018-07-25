@@ -66,6 +66,7 @@ a {
 #topBar ul li a{
 	color:blue;
 	padding: 15px;
+	padding-right: 30px;
 }
 
 .top {
@@ -77,9 +78,11 @@ a {
 	background-color: #00BFFF;
 
 	margin:0px;
+
+	height: 100%;
 }
 
-#inside {
+#wrapper {
 	margin-right: auto;
 	margin-left: auto;
 
@@ -96,7 +99,6 @@ a {
 #footer {
 	position:fixed;
     bottom:0;
-
     width:100%;
     height: 18px;
 
