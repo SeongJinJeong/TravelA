@@ -1,7 +1,18 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const mysql = require('mysql');
+
+var conn = mysql.createConnnection({
+	host : 'localhost',
+	user : 'travela',
+	password : '1234',
+	database : 'travela'
+});
+
 const app = express();
+
+conn.connect();
 
 app.use(express.static('html'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,7 +34,6 @@ app.post('/login_server',function(req,res){
 	}
 	else{
 		res.sendFile(path.join(__dirname,'html','login','login.html'));
-		alert("LOGIN DENIED");
 	}
 })
 
