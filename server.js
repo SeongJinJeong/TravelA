@@ -1,7 +1,14 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-
+const mysql = require('mysql');
+const conn = mysql.createConnection({
+	host : 'localhost',
+	user : 'travela',
+	password : '1234',
+	database : 'travela'
+});
+conn.connect();
 
 const app = express();
 
@@ -21,19 +28,19 @@ app.post('/login_server',function(req,res){
 	var id = req.body.ID;
 	var passwd = req.body.PASSWD;
 
-	if(id=="admin" &&passwd=="jsh8689"){
-		res.redirect('/?status=logined');
-	}
-	else{
-		res.sendFile(path.join(__dirname,'html','login','login.html'));
-	}
+	conn.query('select * from user_idpass where id = ? and pass = ?',[id,passwd],function(err,rows,fields){
+		if(err) console.log(err);
+		else{
+			res.redierct('/');
+		}
+	})
 })
 
 app.get('/register',function(req,res){
 	res.sendFile(path.join(__dirname,'html','register','resgister.html'));
 });
 
-
+conn.end();
 app.listen(800,function(){
-	console.log("Server activated at 80 port!");
+	console.log("Server activated at 800 port!");
 });
