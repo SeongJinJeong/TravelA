@@ -19,13 +19,17 @@ app.set('views','./views');
 app.use(express.static('views'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//MAIN PAGE
 
 app.get('/',function(req,res){
 	res.render('index',{
-		login : login_status
+		s : login_status
 	});
 });
 
+//=================
+
+//LOGIN PAGE
 app.get('/login',function(req,res){
 	res.render('login/login.ejs');
 });
@@ -42,17 +46,33 @@ app.post('/login_server',function(req,res){
 					login_status = 1;
 					res.redirect('/');
 				}
-			})
+			});
 		}
-	})
-})
-
-app.get('/register',function(req,res){
-	res.sendFile(path.join(__dirname,'html','register','resgister.html'));
+	});
 });
 
+//==================
+
+//REGISTER PAGE
+
+app.get('/register',function(req,res){
+	res.render('register/register.ejs');
+});
+app.post('/register_server',function(req,res){
+	var sql = 'insert into user_idpass(id,pass) values(?,?)';
+	conn.query(sql,[req.body.ID,req.body.PASSWD],function(err,rows,fields){
+		if(err) console.log(err);
+		else{
+			res.redirect('/');
+		}
+	});
+});
+
+//===================
 
 app.listen(800,function(){
 	console.log("Server activated at 800 port!");
 });
+
+
 //conn.end();
