@@ -11,27 +11,38 @@ const conn = mysql.createConnection({
 conn.connect();
 
 const app = express();
+var login_status;
 
-app.use(express.static('html'));
+app.set('view engine','ejs');
+app.set('views','./views');
+
+app.use(express.static('views'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.get('/',function(req,res){
-	
-	res.sendFile(path.join(__dirname,'html','index.html'));
+	res.render('index',{
+		login : login_status
+	});
 });
 
 app.get('/login',function(req,res){
-	res.sendFile(path.join(__dirname,'html','login','login.html'));
+	res.render('login/login.ejs');
 });
 app.post('/login_server',function(req,res){
 	var id = req.body.ID;
 	var passwd = req.body.PASSWD;
 
-	conn.query('select * from user_idpass where id = ? and pass = ?',[id,passwd],function(err,rows,fields){
-		if(err) console.log(err);
+	conn.query('select * from user_idpass where id = ?',[id],function(err,rows,fields){
+		if(null) res.redirect('/login?wrong=1');
 		else{
-			res.redierct('/');
+			conn.query('select * from user_idpass where pass = ?',[passwd],function(err,rows,fields){
+				if(err) console.log(err);
+				else{
+					login_status = 1;
+					res.redirect('/');
+				}
+			})
 		}
 	})
 })
@@ -40,7 +51,8 @@ app.get('/register',function(req,res){
 	res.sendFile(path.join(__dirname,'html','register','resgister.html'));
 });
 
-conn.end();
+
 app.listen(800,function(){
 	console.log("Server activated at 800 port!");
 });
+//conn.end();
