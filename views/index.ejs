@@ -9,29 +9,19 @@
 </head>
 	<body>
 		<div id="top" class="top">
-			<%if(s){%>
-				<a href="/?s=1"><p id="logo">TravelA</p></a>
-			<%} else {%>
 				<a href="/"><p id="logo">TravelA</p></a>
-			<% } %>
 			<div id="topMini" class="top">
-				<%if(s){%>
-					<div id="login_status">LOGINED!!</div>
+				<%if(status == 1){%>
+					<div id="login_status">
+						<a href="/myinfo">MYINFO</a>
+						<a href="/logout">LOGOUT</a>
+					</div>
 				<%} else {%>
 					<a href="/login">Login</a>
 					<a href="/register">Register</a>
 				<% } %>
 			</div>
 			<div id="topBar" class="top">
-				<%if(s){%>
-				<ul>
-					<li><a href="/japan?s=1" class="menu">JAPAN</a></li>
-					<li><a href="/austrailia?s=1" class="menu">AUSTRAILIA</a></li>
-					<li><a href="/england?s=1" class="menu">ENGLAND</a></li>
-					<li><a href="/usa?s=1" class="menu">U.S.A</a></li>
-					<li><a href="/community?s=1">COMMUNITY</a></li>
-				</ul>
-				<%} else {%>
 				<ul>
 					<li><a href="/japan" class="menu">JAPAN</a></li>
 					<li><a href="/austrailia" class="menu">AUSTRAILIA</a></li>
@@ -39,7 +29,6 @@
 					<li><a href="/usa" class="menu">U.S.A</a></li>
 					<li><a href="/community">COMMUNITY</a></li>
 				</ul>
-				<% } %>
 			</div>
 		</div>
 
@@ -47,15 +36,6 @@
 
 		<div id="main">
 			<div id="leftFloat">
-				<%if(s){%>
-				<ul>
-					<li><a href="/japan?s=1" class="menu">JAPAN</a></li>
-					<li><a href="/austrailia?s=1" class="menu">AUSTRAILIA</a></li>
-					<li><a href="/england?s=1" class="menu">ENGLAND</a></li>
-					<li><a href="/usa?s=1" class="menu">U.S.A</a></li>
-					<li><a href="/community?s=1">COMMUNITY</a></li>
-				</ul>
-				<%} else {%>
 				<ul>
 					<li><a href="/japan" class="menu">JAPAN</a></li>
 					<li><a href="/austrailia" class="menu">AUSTRAILIA</a></li>
@@ -63,7 +43,6 @@
 					<li><a href="/usa" class="menu">U.S.A</a></li>
 					<li><a href="/community">COMMUNITY</a></li>
 				</ul>
-				<% } %>
 			</div>
 			<div id="wrapper">
 				<div id="content01" class="content">

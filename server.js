@@ -1,4 +1,5 @@
 const express = require('express');
+const JSAlert = require('js-alert');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
@@ -12,6 +13,9 @@ conn.connect();
 
 const app = express();
 var login_status;
+var user_ID;
+var user_PASSWD;
+var message;
 
 app.set('view engine','ejs');
 app.set('views','./views');
@@ -23,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/',function(req,res){
 	res.render('index',{
-		s : login_status
+		status : login_status
 	});
 });
 
@@ -44,7 +48,10 @@ app.post('/login_server',function(req,res){
 				if(err) console.log(err);
 				else{
 					login_status = 1;
+					user_ID = id;
+					user_PASSWD = passwd;
 					res.redirect('/');
+					JSAlert.alert("LOGIN COMPLETE!");
 				}
 			});
 		}
@@ -53,17 +60,43 @@ app.post('/login_server',function(req,res){
 
 //==================
 
+//LOGOUT PAGE 
+
+app.get('/logout',function(req,res){
+	login_status = 0;
+	user_ID = null;
+	user_PASSWD = null;
+	res.redirect('/');
+})
+
+//=================
+
 //REGISTER PAGE
 
 app.get('/register',function(req,res){
-	res.render('register/register.ejs');
+	res.render('register/register',{
+		message : message
+	});
+	message = null;
 });
 app.post('/register_server',function(req,res){
-	var sql = 'insert into user_idpass(id,pass) values(?,?)';
-	conn.query(sql,[req.body.ID,req.body.PASSWD],function(err,rows,fields){
+	conn.query('select exists(select * from user_idpass where id="?")',[req.body.ID],function(err,rows,fields){
 		if(err) console.log(err);
 		else{
-			res.redirect('/');
+			if(rows == 0){
+				var sql = 'insert into user_idpass(id,pass) values(?,?)';
+				conn.query(sql,[req.body.ID,req.body.PASSWD],function(err,rows,fields){
+					if(err) console.log(err);
+					else{
+						res.redirect('/');
+					}
+				});
+			}
+			else{
+				console.log(rows.value);
+				message = "Your ID is already exists";
+				res.redirect('/register');
+			}
 		}
 	});
 });
