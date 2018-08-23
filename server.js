@@ -1,5 +1,4 @@
 const express = require('express');
-const JSAlert = require('js-alert');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
@@ -7,7 +6,8 @@ const conn = mysql.createConnection({
 	host : 'localhost',
 	user : 'travela',
 	password : '1234',
-	database : 'travela'
+	database : 'travela',
+	multipleStatements: 'true'
 });
 conn.connect();
 
@@ -35,25 +35,29 @@ app.get('/',function(req,res){
 
 //LOGIN PAGE
 app.get('/login',function(req,res){
-	res.render('login/login.ejs');
+	res.render('login/login',{
+		message : message
+	});
+	message = null;
 });
 app.post('/login_server',function(req,res){
 	var id = req.body.ID;
 	var passwd = req.body.PASSWD;
 
-	conn.query('select * from user_idpass where id = ?',[id],function(err,rows,fields){
-		if(null) res.redirect('/login?wrong=1');
+	conn.query('select * from user_idpass where id = ? and pass = ?',[id,passwd],function(err,rows,fields){
+		if(err) {
+			message = 'Error!';
+			res.redirect('/login');
+		}
+		else if(rows.length > 0){
+			user_ID = id;
+			user_PASSWD = passwd;
+			login_status = 1;
+			res.redirect('/');
+		}
 		else{
-			conn.query('select * from user_idpass where pass = ?',[passwd],function(err,rows,fields){
-				if(err) console.log(err);
-				else{
-					login_status = 1;
-					user_ID = id;
-					user_PASSWD = passwd;
-					res.redirect('/');
-					JSAlert.alert("LOGIN COMPLETE!");
-				}
-			});
+			message = 'Invalid Login Info';
+			res.redirect('/login');
 		}
 	});
 });
@@ -79,23 +83,22 @@ app.get('/register',function(req,res){
 	});
 	message = null;
 });
+
 app.post('/register_server',function(req,res){
-	conn.query('select exists(select * from user_idpass where id="?")',[req.body.ID],function(err,rows,fields){
+	conn.query('select * from user_idpass where id=?',[req.body.ID],function(err,rows,fields){
 		if(err) console.log(err);
 		else{
-			if(rows == 0){
-				var sql = 'insert into user_idpass(id,pass) values(?,?)';
-				conn.query(sql,[req.body.ID,req.body.PASSWD],function(err,rows,fields){
+			if(rows.length >0){
+				message = 'ID is already exist'
+				res.redirect('/register');
+			}
+			else{
+				conn.query('insert into user_idpass(id,pass) values(?,?)',[req.body.ID,req.body.PASSWD],function(err,rows,fields){
 					if(err) console.log(err);
 					else{
 						res.redirect('/');
 					}
 				});
-			}
-			else{
-				console.log(rows.value);
-				message = "Your ID is already exists";
-				res.redirect('/register');
 			}
 		}
 	});
