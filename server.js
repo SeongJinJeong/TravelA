@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+
+const cookieParser = require('cookie-parser');
+
 const conn = mysql.createConnection({
 	host : 'localhost',
 	user : 'travela',
@@ -22,6 +25,7 @@ app.set('views','./views');
 
 app.use(express.static('views'));
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser('@RJSJKLQQ%@#$%J234'));
 
 //MAIN PAGE
 
@@ -47,15 +51,25 @@ app.post('/login_server',function(req,res){
 	conn.query('select * from user_idpass where id = ? and pass = ?',[id,passwd],function(err,rows,fields){
 		if(err) {
 			message = 'Error!';
+			login_status = 0;
 			res.redirect('/login');
 		}
 		else if(rows.length > 0){
-			user_ID = id;
+
 			user_PASSWD = passwd;
-			login_status = 1;
+			user_ID = id;
+			if(req.signedCookies.login_status){
+				login_status = req.signedCookies.login_status;
+			}
+			else {
+				login_status = 1;
+			}
+
+			res.cookie('login_status',1,{signed:true});
 			res.redirect('/');
 		}
 		else{
+			login_status = 0;
 			message = 'Invalid Login Info';
 			res.redirect('/login');
 		}
@@ -68,8 +82,12 @@ app.post('/login_server',function(req,res){
 
 app.get('/logout',function(req,res){
 	login_status = 0;
-	user_ID = null;
+
+	res.clearCookie('login_status');
+
 	user_PASSWD = null;
+	user_ID = null;
+
 	res.redirect('/');
 })
 

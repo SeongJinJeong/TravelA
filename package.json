@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/SeongJinJeong/TravelA/issues"
   },
-  "homepage": "https://github.com/SeongJinJeong/TravelA#readme"
+  "homepage": "https://github.com/SeongJinJeong/TravelA#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.3"
+  }
 }
