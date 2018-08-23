@@ -1,4 +1,4 @@
-#MYSQL 오답정리!
+#MYSQL 요약정리!
 ### 1. mysql에 데이터가 있는지 확인하기
 ```javascript
 conn.query('select * from user_idpass where id = ? and pass = ?',[id,passwd],function(err,rows,fields){

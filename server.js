@@ -106,6 +106,11 @@ app.post('/register_server',function(req,res){
 
 //===================
 
+//Menu Page 
+var menu = require('./router/menu');
+app.use('/menu',menu);
+
+//===================
 app.listen(800,function(){
 	console.log("Server activated at 800 port!");
 });
