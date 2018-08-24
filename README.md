@@ -15,3 +15,24 @@ conn.query('select * from user_idpass where id = ? and pass = ?',[id,passwd],fun
 		message = "INVALID LOGIN!";
 	}
 ```
+
+
+#JAVASCRIPT 요약정리!
+
+### 1. 브라우저의 크기를 갖고오는 법
+```css
+body {
+	width : 100%;
+	height : 100%;
+}
+```
+위와 같은 코드를 사용해도 안에 내용이 없으면 사이즈가 적용이 안되서 곤란하기 마련이다.
+하지만 다음과 같은 코드를 써서 사용자의 브라우저의 크기를 통해 최대 혹은 최소 높이와 크기를 설정할 수 있다.
+
+```javascript
+var winWidth = window.outerWidth;
+var winHeight = widow.outerHeight;
+
+$('body').css('min-height',winHeight);
+$('body').css('min-width',winWidth);
+```
