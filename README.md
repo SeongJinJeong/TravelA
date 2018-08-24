@@ -36,3 +36,5 @@ var winHeight = widow.outerHeight;
 $('body').css('min-height',winHeight);
 $('body').css('min-width',winWidth);
 ```
+
+
