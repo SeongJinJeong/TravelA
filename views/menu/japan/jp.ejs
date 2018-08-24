@@ -37,15 +37,20 @@
 		<div id="main">
 			<div id="leftFloat">
 				<ul>
-					<li><a href="/japan" class="menu">JAPAN</a></li>
-					<li><a href="/austrailia" class="menu">AUSTRAILIA</a></li>
-					<li><a href="/england" class="menu">ENGLAND</a></li>
-					<li><a href="/usa" class="menu">U.S.A</a></li>
-					<li><a href="/community">COMMUNITY</a></li>
+					<li><a href="/menu/japan" class="menu">JAPAN</a></li>
+					<li><a href="/menu/austrailia" class="menu">AUSTRAILIA</a></li>
+					<li><a href="/menu/england" class="menu">ENGLAND</a></li>
+					<li><a href="/menu/usa" class="menu">U.S.A</a></li>
+					<li><a href="/menu/community">COMMUNITY</a></li>
 				</ul>
 			</div>
 			<div id="wrapper">
-				
+				<div id="contentTitle">
+					<p onmouseenter="this.style.opacity = 0.5;" onmouseleave="this.style.opacity = 1;"><b>JAPAN</b></p>
+				</div>
+				<div id="content">
+					blahblah
+				</div>
 			</div>
 		</div>
 
@@ -56,11 +61,13 @@
 
 
 	<script> 
-		var windowHeight = window.innerHeight;
-		var windowWidth = window.innerWidth;
+		var windowHeight = window.outerHeight;
+		var windowWidth = window.outerWidth;
 
-		$(body).css("width",windowWidth);
+		$('body').css("width",windowWidth);
 		$("#wrapper").css("width",windowWidth*(8/10));
+
+		$("#content").css("min-height",windowHeight);
 
 	</script>
 	</body>

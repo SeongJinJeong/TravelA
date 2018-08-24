@@ -48,7 +48,7 @@ app.post('/login_server',function(req,res){
 	var id = req.body.ID;
 	var passwd = req.body.PASSWD;
 
-	conn.query('select * from user_idpass where id = ? and pass = ?',[id,passwd],function(err,rows,fields){
+	conn.query('select * from user_info where id = ? and pass = ?',[id,passwd],function(err,rows,fields){
 		if(err) {
 			message = 'Error!';
 			login_status = 0;
@@ -103,7 +103,7 @@ app.get('/register',function(req,res){
 });
 
 app.post('/register_server',function(req,res){
-	conn.query('select * from user_idpass where id=?',[req.body.ID],function(err,rows,fields){
+	conn.query('select * from user_info where id=?',[req.body.ID],function(err,rows,fields){
 		if(err) console.log(err);
 		else{
 			if(rows.length >0){
@@ -111,7 +111,7 @@ app.post('/register_server',function(req,res){
 				res.redirect('/register');
 			}
 			else{
-				conn.query('insert into user_idpass(id,pass) values(?,?)',[req.body.ID,req.body.PASSWD],function(err,rows,fields){
+				conn.query('insert into user_info(id,pass,name) values(?,?,?)',[req.body.ID,req.body.PASSWD,req.body.NAME],function(err,rows,fields){
 					if(err) console.log(err);
 					else{
 						res.redirect('/');

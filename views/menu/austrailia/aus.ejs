@@ -45,20 +45,11 @@
 				</ul>
 			</div>
 			<div id="wrapper">
-				<div id="content01" class="content">
-					<div class="img" style="width:100px;height: 180px;">
-						<img src="res/1.png">
-					</div>
+				<div id="contentTitle">
+					<p onmouseenter="this.style.opacity = 0.5;" onmouseleave="this.style.opacity = 1;"><b>AUSTRAILIA</b></p>
 				</div>
-				<div id="content02" class="content">
-					<div class="img">
-						<img src="res/1.png" >
-					</div>
-				</div>
-				<div id="content03" class="content">
-					<div class="img">
-						<img src="res/1.png" >
-					</div>
+				<div id="content">
+					blahblah
 				</div>
 			</div>
 		</div>
@@ -70,11 +61,13 @@
 
 
 	<script> 
-		var windowHeight = window.innerHeight;
-		var windowWidth = window.innerWidth;
+		var windowHeight = window.outerHeight;
+		var windowWidth = window.outerWidth;
 
-		$(body).css("width",windowWidth);
+		$('body').css("width",windowWidth);
 		$("#wrapper").css("width",windowWidth*(8/10));
+
+		$("#content").css("min-height",windowHeight);
 
 	</script>
 	</body>
