@@ -1,4 +1,4 @@
-#MYSQL 요약정리!
+##MYSQL 요약정리!
 ### 1. mysql에 데이터가 있는지 확인하기
 ```javascript
 conn.query('select * from user_idpass where id = ? and pass = ?',[id,passwd],function(err,rows,fields){
@@ -17,7 +17,7 @@ conn.query('select * from user_idpass where id = ? and pass = ?',[id,passwd],fun
 ```
 
 
-#JAVASCRIPT 요약정리!
+##JAVASCRIPT 요약정리!
 
 ### 1. 브라우저의 크기를 갖고오는 법
 ```css
@@ -36,5 +36,4 @@ var winHeight = widow.outerHeight;
 $('body').css('min-height',winHeight);
 $('body').css('min-width',winWidth);
 ```
-
 
