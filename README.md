@@ -37,3 +37,17 @@ $('body').css('min-height',winHeight);
 $('body').css('min-width',winWidth);
 ```
 
+##node.js 요약정리!
+
+### 1. 쿠키를 통해 로그인 상태 유지하는 법
+서버를 통해 로그인을 할때 서버에서 로그인 값을 쿠키로 사용자의 브라우저에 저장시킨다.
+#### EX)
+```javascript
+if(login){
+	res.cookie('login_status',1,{signed:true}); //signed : 쿠키의 값을 암호화 시킨다. true:암호화 false: 암호화X
+}
+app.get('/',function(req,res){
+	res.render('index',{
+		status : req.signedCookies.login_status, //암호화가 되지 않은 쿠키는 res.cookies.login_status로 사용한다.
+		})
+	})

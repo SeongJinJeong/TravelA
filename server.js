@@ -34,9 +34,6 @@ app.use(cookieParser('@RJSJKLQQ%@#$%J234'));
 //MAIN PAGE
 
 app.get('/',function(req,res){
-	if(req.signedCookies.login_status == 1){
-		login_status = 1;
-	}
 	res.render('index',{
 		status : req.signedCookies.login_status
 	});
@@ -55,7 +52,6 @@ app.post('/login_server',function(req,res){
 	conn.query('select * from user_info where id = ? and pass = ?',[req.body.ID,req.body.PASSWD],function(err,rows,fields){
 		if(err) {
 			message = 'Error!';
-			login_status = 0;
 			res.redirect('/login');
 		}
 		else if(rows.length > 0){
@@ -65,19 +61,10 @@ app.post('/login_server',function(req,res){
 				user_info.pwd = rows[0].pass;
 				user_info.name = rows[0].name;
 			});
-			if(req.signedCookies.login_status){
-				login_status = req.signedCookies.login_status;
-			}
-			else {
-				req.signedCookies.login_status = 1;
-				login_status = 1;
-			}
-
 			res.cookie('login_status',1,{signed:true});
 			res.redirect('/');
 		}
 		else{
-			login_status = 0;
 			message = 'Invalid Login Info';
 			res.redirect('/login');
 		}
@@ -89,8 +76,6 @@ app.post('/login_server',function(req,res){
 //LOGOUT PAGE 
 
 app.get('/logout',function(req,res){
-	login_status = 0;
-
 	res.clearCookie('login_status');
 
 	user_info.id = '';
