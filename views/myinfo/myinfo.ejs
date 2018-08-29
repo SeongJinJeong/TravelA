@@ -4,8 +4,8 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 	<meta http-equiv="Content"charset="utf-8">
 	<title>Travel Anywhere</title>
-	<link rel="stylesheet" type="text/css" href="index_css.css">
-	<base href="/html">
+	<link rel="stylesheet" type="text/css" href="myinfo_css.css">
+	<base href="/html/login">
 </head>
 	<body>
 		<div id="top" class="top">
@@ -17,8 +17,8 @@
 						<a href="/logout">LOGOUT</a>
 					</div>
 				<%} else {%>
-					<a href="/login">LOGIN</a>
-					<a href="/register">REGISTER</a>
+					<a href="/login">Login</a>
+					<a href="/register">Register</a>
 				<% } %>
 			</div>
 			<div id="topBar" class="top">
@@ -35,31 +35,22 @@
 
 
 		<div id="main">
-			<div id="leftFloat">
-				<ul>
-					<li><a href="/menu/japan" class="menu">JAPAN</a></li>
-					<li><a href="/menu/austrailia" class="menu">AUSTRAILIA</a></li>
-					<li><a href="/menu/england" class="menu">ENGLAND</a></li>
-					<li><a href="/menu/usa" class="menu">U.S.A</a></li>
-					<li><a href="/menu/community">COMMUNITY</a></li>
-				</ul>
-			</div>
 			<div id="wrapper">
-				<div id="content01" class="content">
-					<div class="img" style="width:100px;height: 180px;">
-						<img src="res/1.png">
-					</div>
-				</div>
-				<div id="content02" class="content">
-					<div class="img">
-						<img src="res/1.png" >
-					</div>
-				</div>
-				<div id="content03" class="content">
-					<div class="img">
-						<img src="res/1.png" >
-					</div>
-				</div>
+				<h2>MY INFO</h2>
+					<table border="1">
+						<tr>
+							<td>Your ID : </td>
+							<td><%=id%></td>
+						</tr>
+						<tr>
+							<td>Your PASSWORD : </td>
+							<td><%=password%></td>
+						</tr>
+						<tr>
+							<td>Your NAME : </td>
+							<td><%=name%></td>
+						</tr>
+					</table>
 			</div>
 		</div>
 
@@ -73,8 +64,12 @@
 		var windowHeight = window.outerHeight;
 		var windowWidth = window.outerWidth;
 
-		$("body").css("width",windowWidth);
+		$("#main").css("height",windowHeight);
+		$("#main").css("width",windowWidth);
+
+		$("#wrapper").css("height",windowHeight);
 		$("#wrapper").css("width",windowWidth*(8/10));
+
 
 	</script>
 	</body>

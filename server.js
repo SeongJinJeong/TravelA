@@ -15,9 +15,11 @@ const conn = mysql.createConnection({
 conn.connect();
 
 const app = express();
-var login_status;
-var user_ID;
-var user_PASSWD;
+var user_info = {
+	id : '',
+	pwd : '',
+	name : '',
+};
 var message;
 
 app.set('view engine','ejs');
@@ -27,11 +29,16 @@ app.use(express.static('views'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser('@RJSJKLQQ%@#$%J234'));
 
+//================
+
 //MAIN PAGE
 
 app.get('/',function(req,res){
+	if(req.signedCookies.login_status == 1){
+		login_status = 1;
+	}
 	res.render('index',{
-		status : login_status
+		status : req.signedCookies.login_status
 	});
 });
 
@@ -45,10 +52,7 @@ app.get('/login',function(req,res){
 	message = null;
 });
 app.post('/login_server',function(req,res){
-	var id = req.body.ID;
-	var passwd = req.body.PASSWD;
-
-	conn.query('select * from user_info where id = ? and pass = ?',[id,passwd],function(err,rows,fields){
+	conn.query('select * from user_info where id = ? and pass = ?',[req.body.ID,req.body.PASSWD],function(err,rows,fields){
 		if(err) {
 			message = 'Error!';
 			login_status = 0;
@@ -56,12 +60,16 @@ app.post('/login_server',function(req,res){
 		}
 		else if(rows.length > 0){
 
-			user_PASSWD = passwd;
-			user_ID = id;
+			conn.query('select * from user_info where id = ?',[req.body.ID],function(err,rows,fields){
+				user_info.id = rows[0].id;
+				user_info.pwd = rows[0].pass;
+				user_info.name = rows[0].name;
+			});
 			if(req.signedCookies.login_status){
 				login_status = req.signedCookies.login_status;
 			}
 			else {
+				req.signedCookies.login_status = 1;
 				login_status = 1;
 			}
 
@@ -85,8 +93,9 @@ app.get('/logout',function(req,res){
 
 	res.clearCookie('login_status');
 
-	user_PASSWD = null;
-	user_ID = null;
+	user_info.id = '';
+	user_info.pwd = '';
+	user_info.name = '';
 
 	res.redirect('/');
 })
@@ -123,6 +132,19 @@ app.post('/register_server',function(req,res){
 });
 
 //===================
+
+//MY INFO PAGE
+
+app.get('/myinfo',function(req,res){
+	res.render('myinfo/myinfo',{
+		status : req.signedCookies.login_status,
+		id : user_info.id,
+		password : user_info.pwd,
+		name : user_info.name
+	});
+});
+
+//==================
 
 //Menu Page 
 var menu = require('./router/menu');
