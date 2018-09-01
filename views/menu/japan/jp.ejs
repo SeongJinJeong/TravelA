@@ -49,7 +49,13 @@
 					<p onmouseenter="this.style.opacity = 0.5;" onmouseleave="this.style.opacity = 1;"><b>JAPAN</b></p>
 				</div>
 				<div id="content">
-					blahblah
+					<div id="buttons">
+						<input type="button" value="Write" class="write" onclick="/write?japan">
+						<input type="button" value="Search" class='write' onclick = "/search?japan">
+					</div>
+					<div id="lists">
+						<%=lists%>
+					</div>	
 				</div>
 			</div>
 		</div>

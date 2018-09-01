@@ -136,9 +136,22 @@ var menu = require('./router/menu');
 app.use('/menu',menu);
 
 //===================
+
+//japan
+
+app.get('/write',function(req,res){
+	res.render('buttons/write',{
+		status : req.signedCookies.login_status,
+	})
+})
+
+//===================
 app.listen(800,function(){
 	console.log("Server activated at 800 port!");
 });
+
+//==================
+
 
 
 //conn.end();

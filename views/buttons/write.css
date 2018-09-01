@@ -8,7 +8,7 @@ html body{
 
 	background-color: 	#F8F8FF;
 
-	overflow: scroll;
+	overflow: hidden;
 }
 
 a {
@@ -35,7 +35,6 @@ a {
 	padding-left: 10px;
 
 	color: darkblue;
-
 }
 #topMini {
 	height: 30px;
@@ -44,14 +43,6 @@ a {
 }
 
 #topMini a{
-	float: right;
-	letter-spacing: 1px;
-	padding: 5px;
-	margin-right: 5px;
-	color: white;
-}
-
-#topMini #login_status {
 	float: right;
 	letter-spacing: 1px;
 	padding: 5px;
@@ -127,7 +118,6 @@ a {
 	margin:0px;
 	margin-top: 10px;
 	margin-right: 10px;
-
 	list-style: none;
 }
 
@@ -155,41 +145,18 @@ a {
 	background-color: #F8F8FF;
 }
 
-#contentTitle {
-	width: 90%;
-	height : 100px;
+#login {
+	margin-top: 20%;
+	margin-left : 50px;
+	margin-right: 50px;
 
-	border : 1px solid black;
+	padding-left: 35%;
 
-	border-radius: 15px 15px 15px 15px;
 
-	margin-left: 45px;
-	margin-top : 10px;
-
-	text-align: center;
-
-	background-image: url('../../res/japanTitle.png');
-	background-repeat: no-repeat;
-	background-position: center;
 }
 
-#contentTitle p {
-	color : black;
-
-	font-size: 30px;
-
-	margin : 0;
-	margin-top: 20px;
-}
-
-#content {
-	border-top: 1px solid black;
-
-	margin-top : 30px;
-}
-
-#content .write {
-	float : right;
+#alert {
+	color : red;
 }
 
 /*----------------------------------------------*/
