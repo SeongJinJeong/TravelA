@@ -8,7 +8,7 @@ html body{
 
 	background-color: 	#F8F8FF;
 
-	overflow: hidden;
+	overflow: scroll;
 }
 
 a {
@@ -145,20 +145,18 @@ a {
 	background-color: #F8F8FF;
 }
 
-#login {
-	margin-top: 20%;
-	margin-left : 50px;
-	margin-right: 50px;
-
-	padding-left: 35%;
-
-
+#Write {
+	font-family: Segoe Script;
+	color : blue;
+	margin-left: 150px;
 }
 
-#alert {
-	color : red;
+#writing_top {
+	padding-bottom: 20px;
 }
-
+#writing_all {
+	margin-left: 150px;
+}
 /*----------------------------------------------*/
 
 

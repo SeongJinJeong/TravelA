@@ -1,10 +1,34 @@
 var express = require('express');
 var router = express.Router();
+const mysql = require('mysql');
+const conn = mysql.createConnection({
+	host : 'localhost',
+	user : 'travela',
+	password : '1234',
+	database : 'travela',
+	multipleStatements: 'true'
+});
+conn.connect();
+var lists = [
+	{
+		title : '',
+		author : '',
+		content : '',
+	}
+]
 
 router.get('/japan',function(req,res){
+	var sql = 'select * from japan';
+	conn.query(sql,function(err,rows,fields){
+		for(var i = 0 ; i<rows.length;i++){
+			lists[i].title = rows[i].title;
+			lists[i].author = rows[i].author;
+			lists[i].content = rows[i].content;
+		}
+	})
 	res.render('menu/japan/jp',{
 		status : req.signedCookies.login_status,
-		lists : 1,
+		lists : lists[0].title,
 	});
 });
 router.get('/austrailia',function(req,res){

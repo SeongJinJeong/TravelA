@@ -50,8 +50,8 @@
 				</div>
 				<div id="content">
 					<div id="buttons">
-						<input type="button" value="Write" class="write" onclick="/write?japan">
-						<input type="button" value="Search" class='write' onclick = "/search?japan">
+						<input type="button" value="Write" class="write" id="write" onclick="location.href='/write'">
+						<input type="button" value="Search" class='write' id="search" onclick = "location.href='/search'">
 					</div>
 					<div id="lists">
 						<%=lists%>
@@ -74,6 +74,9 @@
 		$("#wrapper").css("width",windowWidth*(8/10));
 
 		$("#content").css("min-height",windowHeight);
+
+
+
 
 	</script>
 	</body>

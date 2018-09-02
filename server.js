@@ -34,6 +34,7 @@ app.use(cookieParser('@RJSJKLQQ%@#$%J234'));
 //MAIN PAGE
 
 app.get('/',function(req,res){
+	res.cookie('before_page','/',{signed:true});
 	res.render('index',{
 		status : req.signedCookies.login_status
 	});
@@ -119,7 +120,7 @@ app.post('/register_server',function(req,res){
 //===================
 
 //MY INFO PAGE
-
+ 
 app.get('/myinfo',function(req,res){
 	res.render('myinfo/myinfo',{
 		status : req.signedCookies.login_status,
@@ -137,11 +138,27 @@ app.use('/menu',menu);
 
 //===================
 
-//japan
+//Write Page
 
 app.get('/write',function(req,res){
 	res.render('buttons/write',{
 		status : req.signedCookies.login_status,
+		menu : "japan",
+	});
+});
+
+app.post('/writing_server',function(req,res){
+	before_page = req.query.before;
+
+	var title = req.body.writing_title;
+	var author = req.body.author;
+	var contents = req.body.contents;
+	var sql = "insert into "+before_page+"(title,author,content) values(?,?,?)" 
+	conn.query(sql,[title,author,contents],function(err,rows,fields){
+		if(err) console.log(err);
+		else {
+			res.redirect('/menu/'+before_page);
+		}
 	})
 })
 
