@@ -188,10 +188,14 @@ a {
 
 #buttons {
 	margin-right: 50px;
+
+	margin-top : 30px;
 }
 
 #content .write {
 	float : right;
+
+	margin-top: 15px;
 }
 
 #lists {
@@ -202,12 +206,25 @@ a {
 	border-radius: 40px 40px 40px 40px;
 
 	text-align: center;
+
+	background-color: gainsboro;
 }
 
 #list_title {
 	margin : 20px;
 
-	border-bottom: 1px solid black;
+	border : 1px solid black;
+
+	padding-bottom: 5px;
+
+	background-color: #F8F8FF;
+}
+
+#list_title:first-child {
+	margin : 20px;
+	margin-top: 60px;
+
+	border : 1px solid black;
 
 	padding-bottom: 5px;
 }

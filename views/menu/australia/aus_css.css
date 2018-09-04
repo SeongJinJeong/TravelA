@@ -127,6 +127,7 @@ a {
 	margin:0px;
 	margin-top: 10px;
 	margin-right: 10px;
+
 	list-style: none;
 }
 
@@ -167,9 +168,8 @@ a {
 
 	text-align: center;
 
-	background-image: url('../../res/ausTitle.png');
+	background-image: url('../../res/australiaTitle.png');
 	background-repeat: no-repeat;
-	background-size: 100% 400%;
 	background-position: center;
 }
 
@@ -183,9 +183,50 @@ a {
 }
 
 #content {
-	border-top: 1px solid blue;
+	margin-top : 30px;
+}
+
+#buttons {
+	margin-right: 50px;
 
 	margin-top : 30px;
+}
+
+#content .write {
+	float : right;
+
+	margin-top: 15px;
+}
+
+#lists {
+	margin : 30px;
+
+	border : 1px solid black;
+
+	border-radius: 40px 40px 40px 40px;
+
+	text-align: center;
+
+	background-color: gainsboro;
+}
+
+#list_title {
+	margin : 20px;
+
+	border : 1px solid black;
+
+	padding-bottom: 5px;
+
+	background-color: #F8F8FF;
+}
+
+#list_title:first-child {
+	margin : 20px;
+	margin-top: 60px;
+
+	border : 1px solid black;
+
+	padding-bottom: 5px;
 }
 
 /*----------------------------------------------*/

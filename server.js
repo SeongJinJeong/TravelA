@@ -141,15 +141,14 @@ app.use('/menu',menu);
 //Write Page
 
 app.get('/write',function(req,res){
+	before_page = req.query.before;
 	res.render('buttons/write',{
 		status : req.signedCookies.login_status,
-		menu : "japan",
+		menu : before_page,
 	});
 });
 
 app.post('/writing_server',function(req,res){
-	before_page = req.query.before;
-
 	var title = req.body.writing_title;
 	var author = req.body.author;
 	var contents = req.body.contents;
@@ -157,7 +156,7 @@ app.post('/writing_server',function(req,res){
 	conn.query(sql,[title,author,contents],function(err,rows,fields){
 		if(err) console.log(err);
 		else {
-			res.redirect('/');
+			res.redirect('/menu/'+before_page);
 		}
 	})
 })

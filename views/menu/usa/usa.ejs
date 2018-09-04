@@ -24,7 +24,7 @@
 			<div id="topBar" class="top">
 				<ul>
 					<li><a href="/menu/japan" class="menu">JAPAN</a></li>
-					<li><a href="/menu/austrailia" class="menu">AUSTRAILIA</a></li>
+					<li><a href="/menu/australia" class="menu">AUSTRALIA</a></li>
 					<li><a href="/menu/england" class="menu">ENGLAND</a></li>
 					<li><a href="/menu/usa" class="menu">U.S.A</a></li>
 					<li><a href="/menu/community">COMMUNITY</a></li>
@@ -38,7 +38,7 @@
 			<div id="leftFloat">
 				<ul>
 					<li><a href="/menu/japan" class="menu">JAPAN</a></li>
-					<li><a href="/menu/austrailia" class="menu">AUSTRAILIA</a></li>
+					<li><a href="/menu/australia" class="menu">AUSTRALIA</a></li>
 					<li><a href="/menu/england" class="menu">ENGLAND</a></li>
 					<li><a href="/menu/usa" class="menu">U.S.A</a></li>
 					<li><a href="/menu/community">COMMUNITY</a></li>
@@ -49,7 +49,17 @@
 					<p onmouseenter="this.style.opacity = 0.5;" onmouseleave="this.style.opacity = 1;"><b>U.S.A</b></p>
 				</div>
 				<div id="content">
-					blahblah
+					<% if(status == 1){ %>
+					<div id="buttons">
+						<input type="button" value="Write" class="write" id="write" onclick="location.href='/write?before=usa'">
+						<input type="button" value="Search" class='write' id="search" onclick = "location.href='/search?before=usa'">
+					</div>
+					<%}%>
+					<div id="lists">
+						<% for(var i=0; i< lists.length;i++){ %>
+						<div id='list_title'><a href="/menu/usa/writings?which=<%=lists[i].title %>"><%= lists[i].title %></a></div>
+						<% } %>
+					</div>	
 				</div>
 			</div>
 		</div>
@@ -68,6 +78,8 @@
 		$("#wrapper").css("width",windowWidth*(8/10));
 
 		$("#content").css("min-height",windowHeight);
+
+		$("#lists").css("min-height",windowHeight);
 
 	</script>
 	</body>
