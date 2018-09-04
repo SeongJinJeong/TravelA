@@ -9,28 +9,33 @@ const conn = mysql.createConnection({
 	multipleStatements: 'true'
 });
 conn.connect();
-var list = [
-	{
-		title : '',
-		author : '',
-		content : '',
-	}
-]
+var list = [];
 
 router.get('/japan',function(req,res){
 	var sql = 'select * from japan';
 	conn.query(sql,function(err,rows,fields){
-		for(var i = 0 ; i<rows.length;i++){
-			list[i].title = rows[i].title;
-			list[i].author = rows[i].author;
-			list[i].content = rows[i].content;
-		}
-		res.render('menu/japan/jp',{
-		status : req.signedCookies.login_status,
-		lists : list,
-		});
-	});	
-});
+	   for(var i = 0 ; i<rows.length;i++){
+	       list[i] = {title : rows[i].title, author : rows[i].author, 
+	       content : rows[i].content} 
+	   }
+	res.render('menu/japan/jp',{
+	    status : req.signedCookies.login_status,
+	    lists : list,
+	    });
+	 });
+}); 
+
+router.get('/japan/writings',function(req,res){
+	var which = req.query.which;
+	var sql = 'select * from japan where title=?';
+	conn.query(sql,[which],function(err,rows,fields){
+		res.render('menu/japan/writings',{
+			status : req.signedCookies.login_status,
+			lists : rows[0],
+		})
+	})
+})
+
 router.get('/austrailia',function(req,res){
 	res.render('menu/austrailia/aus',{
 		status : req.signedCookies.login_status,

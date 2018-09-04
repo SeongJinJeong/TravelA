@@ -49,14 +49,15 @@
 					<p onmouseenter="this.style.opacity = 0.5;" onmouseleave="this.style.opacity = 1;"><b>JAPAN</b></p>
 				</div>
 				<div id="content">
+					<% if(status == 1){ %>
 					<div id="buttons">
 						<input type="button" value="Write" class="write" id="write" onclick="location.href='/write'">
 						<input type="button" value="Search" class='write' id="search" onclick = "location.href='/search'">
 					</div>
+					<%}%>
 					<div id="lists">
-						<% console.log(lists) %>
 						<% for(var i=0; i< lists.length;i++){ %>
-						<div id='list_title'><%= lists[0].title %></div>
+						<div id='list_title'><a href="/menu/japan/writings?which=<%=lists[i].title %>"><%= lists[i].title %></a></div>
 						<% } %>
 					</div>	
 				</div>
@@ -78,7 +79,7 @@
 
 		$("#content").css("min-height",windowHeight);
 
-
+		$("#lists").css("min-height",windowHeight);
 
 
 	</script>

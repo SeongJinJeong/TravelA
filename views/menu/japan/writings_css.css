@@ -127,7 +127,6 @@ a {
 	margin:0px;
 	margin-top: 10px;
 	margin-right: 10px;
-
 	list-style: none;
 }
 
@@ -155,61 +154,20 @@ a {
 	background-color: #F8F8FF;
 }
 
-#contentTitle {
-	width: 90%;
-	height : 100px;
+.content {
+	margin-top: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
 
-	border : 1px solid black;
+	border: 1px solid black;
+	border-radius: 10px 10px 10px 10px;
 
-	border-radius: 15px 15px 15px 15px;
+	padding: 10px;
 
-	margin-left: 45px;
-	margin-top : 10px;
-
-	text-align: center;
-
-	background-image: url('../../res/japanTitle.png');
-	background-repeat: no-repeat;
-	background-position: center;
-}
-
-#contentTitle p {
-	color : black;
-
-	font-size: 30px;
-
-	margin : 0;
-	margin-top: 20px;
-}
-
-#content {
-	margin-top : 30px;
-}
-
-#buttons {
-	margin-right: 50px;
-}
-
-#content .write {
-	float : right;
-}
-
-#lists {
-	margin : 30px;
-
-	border : 1px solid black;
-
-	border-radius: 40px 40px 40px 40px;
-
-	text-align: center;
-}
-
-#list_title {
-	margin : 20px;
-
-	border-bottom: 1px solid black;
-
-	padding-bottom: 5px;
+	min-width: 80%;
+	max-width: 100%;
+	min-height: 20%;
+	max-height: 30%;
 }
 
 /*----------------------------------------------*/
