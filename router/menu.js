@@ -9,7 +9,7 @@ const conn = mysql.createConnection({
 	multipleStatements: 'true'
 });
 conn.connect();
-var lists = [
+var list = [
 	{
 		title : '',
 		author : '',
@@ -21,15 +21,15 @@ router.get('/japan',function(req,res){
 	var sql = 'select * from japan';
 	conn.query(sql,function(err,rows,fields){
 		for(var i = 0 ; i<rows.length;i++){
-			lists[i].title = rows[i].title;
-			lists[i].author = rows[i].author;
-			lists[i].content = rows[i].content;
+			list[i].title = rows[i].title;
+			list[i].author = rows[i].author;
+			list[i].content = rows[i].content;
 		}
-	})
-	res.render('menu/japan/jp',{
+		res.render('menu/japan/jp',{
 		status : req.signedCookies.login_status,
-		lists : lists[0].title,
-	});
+		lists : list,
+		});
+	});	
 });
 router.get('/austrailia',function(req,res){
 	res.render('menu/austrailia/aus',{
@@ -53,7 +53,7 @@ router.get('/usa',function(req,res){
 	res.render('menu/usa/usa',{
 		status : req.signedCookies.login_status,
 		lists : 1,
-	})
-})
+	});
+});
 
 module.exports = router;

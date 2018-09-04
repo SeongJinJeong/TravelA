@@ -54,7 +54,10 @@
 						<input type="button" value="Search" class='write' id="search" onclick = "location.href='/search'">
 					</div>
 					<div id="lists">
-						<%=lists%>
+						<% console.log(lists) %>
+						<% for(var i=0; i< lists.length;i++){ %>
+						<div id='list_title'><%= lists[0].title %></div>
+						<% } %>
 					</div>	
 				</div>
 			</div>

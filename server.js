@@ -157,7 +157,7 @@ app.post('/writing_server',function(req,res){
 	conn.query(sql,[title,author,contents],function(err,rows,fields){
 		if(err) console.log(err);
 		else {
-			res.redirect('/menu/'+before_page);
+			res.redirect('/');
 		}
 	})
 })
