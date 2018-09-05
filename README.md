@@ -37,6 +37,19 @@ $('body').css('min-height',winHeight);
 $('body').css('min-width',winWidth);
 ```
 
+### 2. 문자를 전부 소문자로 바꾸는 법
+```javascript
+var user_id = 'AdMin';
+
+//how to check user_id is similar to admin or not
+
+if(user_id.toLowerCase() == 'admin'){
+	return false;
+}
+else {
+	return true;
+}
+```
 ##node.js 요약정리!
 
 ### 1. 쿠키를 통해 로그인 상태 유지하는 법
