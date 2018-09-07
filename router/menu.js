@@ -14,7 +14,6 @@ conn.connect();
 
 
 router.get('/japan',function(req,res){
-	req.cookies.before_page = "japan";
 	var list = [];
 	var sql = 'select * from japan';
 	conn.query(sql,function(err,rows,fields){
@@ -36,7 +35,7 @@ router.get('/japan/writings',function(req,res){
 		res.render('menu/japan/writings',{
 			status : req.signedCookies.login_status,
 			lists : rows[0],
-			user_id : req.signedCookies.user_id,
+			user_id : req.cookies.user_id,
 			writer : rows[0].user_id,
 			admin : req.cookies.admin,
 		});
@@ -44,7 +43,6 @@ router.get('/japan/writings',function(req,res){
 });
 
 router.get('/australia',function(req,res){
-	req.cookies.before_page = 'australia';
 	var list = [];
 	var sql = 'select * from australia';
 	conn.query(sql,function(err,rows,fields){
@@ -73,7 +71,6 @@ router.get('/australia/writings',function(req,res){
 
 
 router.get('/england',function(req,res){
-	req.cookies.before_page = 'england';
 	var list = [];
 	var sql = 'select * from england';
 	conn.query(sql,function(err,rows,fields){
@@ -102,7 +99,6 @@ router.get('/england/writings',function(req,res){
 
 
 router.get('/community',function(req,res){
-	req.cookies.before_page = 'community';
 	var list = [];
 	var sql = 'select * from community';
 	conn.query(sql,function(err,rows,fields){
@@ -131,7 +127,6 @@ router.get('/community/writings',function(req,res){
 
 
 router.get('/usa',function(req,res){
-	req.cookies.before_page = 'usa';
 	var list = [];
 	var sql = 'select * from usa';
 	conn.query(sql,function(err,rows,fields){
