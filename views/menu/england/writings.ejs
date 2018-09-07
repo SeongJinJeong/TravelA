@@ -53,6 +53,11 @@
 						Author : <%= lists.author %>
 					</div>
 					<textarea id="list_content" readonly="readonly" style="resize: none;"><%= lists.content %></textarea>
+					<% if(admin){%>
+					<a href="/delete_server?before=england&&title=<%=lists.title %>" style="margin-left: 47%; color: white;">DELETE</a>
+					<% } else if(user_id == writer) {%>
+					<a href="/delete_server?before=england&&title=<%=lists.title %>" style="margin-left: 47%; color: white;">DELETE</a>
+					<% } %>
 				</div>
 			</div>
 		</div>

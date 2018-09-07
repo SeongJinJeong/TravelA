@@ -54,18 +54,17 @@
 					</div>
 					<textarea id="list_content" readonly="readonly" style="resize: none;"><%= lists.content %></textarea>
 					<% if(admin){%>
-					<a href="/delete_server" style="margin-left: 47%; color: white;">DELETE</a>
+					<a href="/delete_server?before=japan&&title=<%=lists.title %>" style="margin-left: 47%; color: white;">DELETE</a>
 					<% } else if(user_id == writer) {%>
-					<a href="/delete_server" style="margin-left: 47%; color: white;">DELETE</a>
+					<a href="/delete_server?before=japan&&title=<%=lists.title %>" style="margin-left: 47%; color: white;">DELETE</a>
 					<% } %>
 				</div>
-
 			</div>
 		</div>
 
 
 		<div id="footer">
-				JeongSeongJin All Copyrights deserved
+			JeongSeongJin All Copyrights deserved
 		</div>
 
 

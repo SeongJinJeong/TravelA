@@ -64,6 +64,9 @@ router.get('/australia/writings',function(req,res){
 		res.render('menu/australia/writings',{
 			status : req.signedCookies.login_status,
 			lists : rows[0],
+			user_id : req.cookies.user_id,
+			writer : rows[0].user_id,
+			admin : req.cookies.admin,
 		});
 	});
 });
@@ -92,6 +95,9 @@ router.get('/england/writings',function(req,res){
 		res.render('menu/england/writings',{
 			status : req.signedCookies.login_status,
 			lists : rows[0],
+			user_id : req.cookies.user_id,
+			writer : rows[0].user_id,
+			admin : req.cookies.admin,
 		});
 	});
 });
@@ -120,6 +126,9 @@ router.get('/community/writings',function(req,res){
 		res.render('menu/community/writings',{
 			status : req.signedCookies.login_status,
 			lists : rows[0],
+			user_id : req.cookies.user_id,
+			writer : rows[0].user_id,
+			admin : req.cookies.admin,
 		});
 	});
 });
@@ -148,6 +157,9 @@ router.get('/usa/writings',function(req,res){
 		res.render('menu/usa/writings',{
 			status : req.signedCookies.login_status,
 			lists : rows[0],
+			user_id : req.cookies.user_id,
+			writer : rows[0].user_id,
+			admin : req.cookies.admin,
 		});
 	});
 });

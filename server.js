@@ -181,6 +181,20 @@ app.post('/writing_server',function(req,res){
 	}
 })
 
+app.get('/delete_server',function(req,res){
+	var before_page = req.query.before;
+	var title = req.query.title;
+	var sql = 'delete from '+before_page+' where title=?';
+
+	conn.query(sql,[title],function(err,rows,fields){
+		if(err) console.log(err);
+		else {
+			console.log(rows[0]);
+			res.redirect('/menu/'+before_page);
+		}
+	})
+})
+
 //===================
 app.listen(800,function(){
 	console.log("Server activated at 800 port!");
