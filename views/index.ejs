@@ -13,8 +13,11 @@
 			<div id="topMini" class="top">
 				<%if(status == 1){%>
 					<div id="login_status">
-						<a href="/myinfo">MYINFO</a>
-						<a href="/logout">LOGOUT</a>
+						<% if(admin == 1){ %>
+							<a href="/manage">MANAGE</a>
+						<% } %>
+							<a href="/myinfo">MYINFO</a>
+							<a href="/logout">LOGOUT</a>
 					</div>
 				<%} else {%>
 					<a href="/login">LOGIN</a>

@@ -35,9 +35,10 @@ app.use(cookieParser('@RJSJKLQQ%@#$%J234'));
 //MAIN PAGE
 
 app.get('/',function(req,res){
-	res.cookie('before_page','/',{signed:true});
+	res.cookie('before_page','/');
 	res.render('index',{
-		status : req.signedCookies.login_status
+		status : req.signedCookies.login_status,
+		admin : req.cookies.admin,
 	});
 });
 
@@ -62,8 +63,11 @@ app.post('/login_server',function(req,res){
 				user_info.pwd = rows[0].pass;
 				user_info.name = rows[0].name;
 			});
+			if(rows[0].id == 'admin'){
+				res.cookie('admin',1);
+			}
 			res.cookie('login_status',1,{signed:true});
-			res.cookie('user_id',user_info.id,{signed:true});
+			res.cookie('user_id',rows[0].id,{signed:true});
 			res.redirect('/');
 		}
 		else{
@@ -144,10 +148,9 @@ app.use('/menu',menu);
 //Write Page
 
 app.get('/write',function(req,res){
-	before_page = req.query.before;
 	res.render('buttons/write',{
 		status : req.signedCookies.login_status,
-		menu : before_page,
+		menu : req.cookies.before_page,
 		user_id : user_info.id,
 		message : write_message,
 	});
@@ -159,16 +162,18 @@ app.post('/writing_server',function(req,res){
 	var author = req.body.author;
 	var contents = req.body.contents;
 	var user_id = req.body.user_id;
-	var sql = "insert into "+before_page+"(title,author,content,user_id) values(?,?,?,?)";
+	console.log(user_id);
+	var sql = "insert into "+req.cookies.before_page+"(title,author,content,user_id) values(?,?,?,?)";
 	if(user_info.id != 'admin' && author.toLowerCase() === 'admin'){
 	    write_message = "You can't use admin NickName!";
 	    res.redirect('/write');
 	} 
 	else {
-	    conn.query(sql,[title,author,contents,user_id],function(err,rows,fields){
+	    conn.query(sql,[title,author,contents,user_info.id],function(err,rows,fields){
 	        if(err) console.log(err);
 	        else {
-	            res.redirect('/menu/'+before_page);
+	            res.redirect('/menu/'+req.cookies.before_page);
+	            res.clearCookie('before_page');	
 	        }
 	    });
 	}

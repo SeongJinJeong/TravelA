@@ -52,10 +52,14 @@
 					<div id="list_author">
 						Author : <%= lists.author %>
 					</div>
-					<div id="list_content">
-						<%= lists.content %>
-					</div>
+					<textarea id="list_content" readonly="readonly" style="resize: none;"><%= lists.content %></textarea>
+					<% if(admin){%>
+					<a href="/delete_server" style="margin-left: 47%; color: white;">DELETE</a>
+					<% } else if(user_id == writer) {%>
+					<a href="/delete_server" style="margin-left: 47%; color: white;">DELETE</a>
+					<% } %>
 				</div>
+
 			</div>
 		</div>
 
@@ -75,7 +79,6 @@
 		$("#content").css("min-height",windowHeight);
 
 		$("#lists").css("min-height",windowHeight);
-
 	</script>
 	</body>
 </html>
