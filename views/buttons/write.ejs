@@ -2,6 +2,7 @@
 <html>
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+	<script type="application/x-javascript" src="../../Api/se2/js/service/huskyESCreator.js"></script>
 	<meta http-equiv="Content"charset="utf-8">
 	<title>Travel Anywhere</title>
 	<link rel="stylesheet" type="text/css" href="buttons/write_css.css">
@@ -47,7 +48,7 @@
 							<input type="text" size="100" id="author"class="writing" name="author" placeholder="Write Your NickName">
 						</div>
 						<div id="writing_mid">
-							<textarea cols="102" rows="30" class="writing" name="contents" style="resize: none;" placeholder="Write Your Contents"></textarea>
+							<textarea cols="102" rows="30" class="writing" name="contents" id="contents" style="resize: none;" placeholder="Write Your Contents"></textarea>
 						</div>
 						<div id="submit">
 							<input type="submit" value="Upload">
@@ -72,6 +73,15 @@
 
 		$("#wrapper").css("height",windowHeight);
 		$("#wrapper").css("width",windowWidth*(8/10));
+
+		$(function(){
+			nhn.husky.EZCreator.createInIFrame({
+				oAppRef : oEditors,
+				elPlaceholder : "contents",
+				sSkinURL : "../../Api/se2/SmartEditor2Skin.html",
+				fCreator : "createSEditor2",
+			})
+		})
 
 	</script>
 	</body>
