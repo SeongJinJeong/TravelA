@@ -50,6 +50,47 @@ else {
 	return true;
 }
 ```
+
+### 3. Naver Smart Editor2 사용법
+먼저 네이버 개발자센터의 깃허브 https://github.com/naver/smarteditor2 주소에 들어가 파일을 다운받는다. 그리고 dist폴더를 내 서버에 저장시킨다.(폴더명을 변경해도 상관없음.)
+에디터를 적용시킬 html 혹은 ejs 파일에 HuskyEZCreator.js 파일을 적용시킨다. 필자의 경로는 ../Api/se2/js/service/HuskyEZCreator.js 이다.
+#### EX)
+```html
+<script type="text/javascript" src="../Api/se2/js/service/HuskyEZCreator.js"></script>
+```
+그 다음 적용시키고 싶은 textarea의 id값을 이용해 설정해 준다.
+```html
+<textarea cols="102" rows="30" class="writing" name="contents" id="contents" style="resize: none;" placeholder="Write Your Contents">Write Your Contents!</textarea>
+<button id="uploadButton">Upload</button>
+
+
+<script type="text/javascript">
+	var oEditors = [];	//전역변수를 처음에 설정해준다.
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef: oEditors,
+		elPlaceHolder: "contents",	//textarea의 id값을 넣어준다.
+		sSkinURI: "../Api/se2/SmartEditor2Skin.html",	//dist파일에 있는 SmartEditor2Skin.html 파일의 경로를 넣어준다.
+		htParams : {
+			bUseVerticalResizer : false,	//크기 조절 바를 생성한다.(true: 생성 , false : 제거)
+			bUseModeChanger : false,		//모드 조절 바를 생성한다.(true: 생성 , false : 제거)
+		},
+		fCreator: "createSEditor2"
+	});
+
+	//버튼을 눌렀을 시 form안의 값들이 전송되게 한다.
+	$("#uploadButton").click(function(){
+		editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);	//"" 안에 textarea의 id값을 넣어준다.		         
+		// 이부분에 에디터 validation을 검증한다.
+
+		$("#frm").submit();		//form을 전송한다.
+	});
+</script>
+```
+
+##### TIPS)
+1. 왜그런지는 모르겠지만 input 태그를 사용한 버튼은 submit이 작동을 하지 않는다. 따라서 input 태그 대신 button 태그를 사용하는게 좋다.
+2. 에디터 설정 스크립트 코드를 textarea 바로 밑에 넣어야한다. 그렇지 않으면 mime type에러 혹은 404에러가 나온다.
+
 ##node.js 요약정리!
 
 ### 1. 쿠키를 통해 로그인 상태 유지하는 법
