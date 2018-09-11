@@ -164,7 +164,6 @@ app.post('/writing_server',function(req,res){
 	var author = req.body.author;
 	var contents = req.body.contents;
 	var user_id = req.body.user_id;
-	console.log(user_id);
 	var sql = "insert into "+before_page+"(title,author,content,user_id) values(?,?,?,?)";
 	if(user_info.id != 'admin' && author.toLowerCase() === 'admin'){
 	    write_message = "You can't use admin NickName!";
@@ -174,8 +173,7 @@ app.post('/writing_server',function(req,res){
 	    conn.query(sql,[title,author,contents,user_info.id],function(err,rows,fields){
 	        if(err) console.log(err);
 	        else {
-	            res.redirect('/menu/'+before_page);
-	            res.clearCookie('before_page');	
+	            res.redirect('/menu/'+before_page);	
 	        }
 	    });
 	}
@@ -189,7 +187,6 @@ app.get('/delete_server',function(req,res){
 	conn.query(sql,[title],function(err,rows,fields){
 		if(err) console.log(err);
 		else {
-			console.log(rows[0]);
 			res.redirect('/menu/'+before_page);
 		}
 	})

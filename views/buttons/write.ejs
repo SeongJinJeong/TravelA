@@ -48,7 +48,7 @@
 							<input type="text" size="100" id="author"class="writing" name="author" placeholder="Write Your NickName">
 						</div>
 						<div id="writing_mid">
-							<textarea cols="102" rows="30" class="writing" name="contents" id="contents" style="resize: none;" placeholder="Write Your Contents">Write Your Contents!</textarea>
+							<textarea cols="102" rows="30" class="writing" name="contents" id="contents" style="resize: none;" placeholder="Write Your Contents"></textarea>
 							<script type="text/javascript">
 								var oEditors = [];
 								nhn.husky.EZCreator.createInIFrame({
@@ -61,12 +61,7 @@
 								    },
 								    fCreator: "createSEditor2"
 								});
-								$("#uploadButton").click(function(){
-									//id가 smarteditor인 textarea에 에디터에서 대입
-									editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);			         
-									// 이부분에 에디터 validation 검증
-									$("#frm").submit();
-								});
+								
 							</script>
 						</div>
 						<div id="submit">
@@ -96,7 +91,12 @@
 		$("#wrapper").css("height",windowHeight);
 		$("#wrapper").css("width",windowWidth*(8/10));
 
-		
+		$("#uploadButton").click(function(){
+			//id가 Contents인 textarea에 에디터에서 대입
+			oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);		         
+			// 이부분에 에디터 validation 검증
+			$("#frm").submit();
+		});
 	</script>
 	</body>
 </html>
