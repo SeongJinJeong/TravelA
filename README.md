@@ -79,7 +79,7 @@ else {
 
 	//버튼을 눌렀을 시 form안의 값들이 전송되게 한다.
 	$("#uploadButton").click(function(){
-		editor_object.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);	//"" 안에 textarea의 id값을 넣어준다.		         
+		oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);	//"" 안에 textarea의 id값을 넣어준다.		         
 		// 이부분에 에디터 validation을 검증한다.
 
 		$("#frm").submit();		//form을 전송한다.
