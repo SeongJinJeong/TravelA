@@ -28,19 +28,6 @@ router.get('/japan',function(req,res){
 	 });
 }); 
 
-router.get('/japan/writings',function(req,res){
-	var which = req.query.which;
-	var sql = 'select * from japan where title=?';
-	conn.query(sql,[which],function(err,rows,fields){
-		res.render('menu/japan/writings',{
-			status : req.signedCookies.login_status,
-			lists : rows[0],
-			user_id : req.cookies.user_id,
-			writer : rows[0].user_id,
-			admin : req.cookies.admin,
-		});
-	});
-});
 
 router.get('/australia',function(req,res){
 	var list = [];
@@ -57,19 +44,6 @@ router.get('/australia',function(req,res){
 	 });
 });
 
-router.get('/australia/writings',function(req,res){
-	var which = req.query.which;
-	var sql = 'select * from australia where title=?';
-	conn.query(sql,[which],function(err,rows,fields){
-		res.render('menu/australia/writings',{
-			status : req.signedCookies.login_status,
-			lists : rows[0],
-			user_id : req.cookies.user_id,
-			writer : rows[0].user_id,
-			admin : req.cookies.admin,
-		});
-	});
-});
 
 
 
@@ -88,19 +62,6 @@ router.get('/england',function(req,res){
 	 });
 });
 
-router.get('/england/writings',function(req,res){
-	var which = req.query.which;
-	var sql = 'select * from england where title=?';
-	conn.query(sql,[which],function(err,rows,fields){
-		res.render('menu/england/writings',{
-			status : req.signedCookies.login_status,
-			lists : rows[0],
-			user_id : req.cookies.user_id,
-			writer : rows[0].user_id,
-			admin : req.cookies.admin,
-		});
-	});
-});
 
 
 
@@ -119,19 +80,6 @@ router.get('/community',function(req,res){
 	 });
 });
 
-router.get('/community/writings',function(req,res){
-	var which = req.query.which;
-	var sql = 'select * from community where title=?';
-	conn.query(sql,[which],function(err,rows,fields){
-		res.render('menu/community/writings',{
-			status : req.signedCookies.login_status,
-			lists : rows[0],
-			user_id : req.cookies.user_id,
-			writer : rows[0].user_id,
-			admin : req.cookies.admin,
-		});
-	});
-});
 
 
 
@@ -150,19 +98,6 @@ router.get('/usa',function(req,res){
 	 });
 });
 
-router.get('/usa/writings',function(req,res){
-	var which = req.query.which;
-	var sql = 'select * from usa where title=?';
-	conn.query(sql,[which],function(err,rows,fields){
-		res.render('menu/usa/writings',{
-			status : req.signedCookies.login_status,
-			lists : rows[0],
-			user_id : req.cookies.user_id,
-			writer : rows[0].user_id,
-			admin : req.cookies.admin,
-		});
-	});
-});
 
 
 

@@ -52,11 +52,11 @@
 					<div id="list_author">
 						Author : <%= lists.author %>
 					</div>
-					<textarea id="list_content" readonly="readonly" style="resize: none;"><%= lists.content %></textarea>
+					<div id="list_content" readonly="readonly" style="resize: none;"><%- lists.content %></div>
 					<% if(admin){%>
-					<a href="/delete_server?before=england&&title=<%=lists.title %>" style="margin-left: 47%; color: white;">DELETE</a>
+					<a href="/delete_server?before=<%=before%>&&title=<%=lists.title %>" style="margin-left: 47%; color: white;">DELETE</a>
 					<% } else if(user_id == writer) {%>
-					<a href="/delete_server?before=england&&title=<%=lists.title %>" style="margin-left: 47%; color: white;">DELETE</a>
+					<a href="/delete_server?before=japan&&title=<%=lists.title %>" style="margin-left: 47%; color: white;">DELETE</a>
 					<% } %>
 				</div>
 			</div>
@@ -64,7 +64,7 @@
 
 
 		<div id="footer">
-				JeongSeongJin All Copyrights deserved
+			JeongSeongJin All Copyrights deserved
 		</div>
 
 
@@ -78,6 +78,12 @@
 		$("#content").css("min-height",windowHeight);
 
 		$("#lists").css("min-height",windowHeight);
+
+
+		function htmlEncode(string) {
+		    return string.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+		        .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+		}
 
 	</script>
 	</body>

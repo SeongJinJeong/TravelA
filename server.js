@@ -179,6 +179,24 @@ app.post('/writing_server',function(req,res){
 	}
 })
 
+app.get('/writings',function(req,res){
+	var before = req.query.before;
+	var which = req.query.which;
+	var sql = 'select * from '+before+' where title=?';
+	conn.query(sql,[which],function(err,rows,fields){
+		if(err) console.log(err);
+		else{
+			res.render('writings/writings',{
+				status : req.signedCookies.login_status,
+				lists : rows[0],
+				user_id : req.cookies.user_id,
+				writer : rows[0].user_id,
+				admin : req.cookies.admin,
+				before : before,
+			});
+		}
+	});
+});
 app.get('/delete_server',function(req,res){
 	var before_page = req.query.before;
 	var title = req.query.title;
