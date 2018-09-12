@@ -154,20 +154,17 @@ a {
 	background-color: #F8F8FF;
 }
 
-.content {
-	margin-top: 10px;
-	margin-left: 20px;
-	margin-right: 20px;
+#content {
+	font-family: Freestyle Script;
+	font-size : 50px;
 
-	border: 1px solid black;
-	border-radius: 10px 10px 10px 10px;
+	color: skyblue;
 
-	padding: 10px;
+	padding-left: 80px;
 
-	min-width: 80%;
-	max-width: 100%;
-	min-height: 20%;
-	max-height: 30%;
+	border-bottom: 5px solid blue;
+
+	background-image: "res/index_title.png";
 }
 
 /*----------------------------------------------*/
