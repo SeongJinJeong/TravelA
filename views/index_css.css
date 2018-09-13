@@ -145,6 +145,7 @@ a {
 #wrapper {
 	margin-right: auto;
 	margin-left: auto;
+	margin-top: 0px;
 
 	padding-top: 10px;
 
@@ -154,17 +155,87 @@ a {
 	background-color: #F8F8FF;
 }
 
-#content {
+#title {
+	height: 200px;
+
 	font-family: Freestyle Script;
 	font-size : 50px;
 
 	color: skyblue;
 
+	margin-top: -78px;
+
 	padding-left: 80px;
 
-	border-bottom: 5px solid blue;
+	background-image: url("res/index_title.png");
+	background-repeat: no-repeat;
+	background-position: center;
+}
 
-	background-image: "res/index_title.png";
+#content {
+	margin-top : 30px;
+}
+
+#content .write {
+	float : right;
+
+	margin-top: 15px;
+}
+
+#lists {
+	margin : 30px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+
+	border : 1px solid black;
+	border-bottom: none;
+
+	border-radius: 40px 40px 0px 0px;
+
+	text-align: center;
+
+	background-color: #787878;
+
+	height: 100%;
+}
+
+#list_title {
+	margin : 20px;
+	margin-bottom: -20px;
+
+	border : 1px solid black;
+
+	padding-bottom: 5px;
+
+	background-color: blue;
+}
+
+#list_title a {
+	color : white;
+}
+
+#list_title:first-child {
+	margin : 20px;
+	margin-top: 40px;
+	margin-bottom: -20px;
+
+	border : 1px solid black;
+
+	padding-bottom: 5px;
+}
+
+#list_content {
+	margin :20px;
+	margin-top:20px;
+
+	padding-top: 10px;
+
+	border : 1px solid black;
+	border-top : none;
+
+	color : black;
+
+	background-color: white;
 }
 
 /*----------------------------------------------*/

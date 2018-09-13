@@ -35,10 +35,21 @@ app.use(cookieParser('@RJSJKLQQ%@#$%J234'));
 //MAIN PAGE
 
 app.get('/',function(req,res){
-	res.render('index',{
-		status : req.signedCookies.login_status,
-		admin : req.cookies.admin,
-	});
+	conn.query('select * from community where author="admin"',function(err,rows,fields){
+		var list = [];
+		if(err) console.log(err);
+		else{
+			for(var i = 0 ; i<rows.length;i++){
+		       	list[i] = {title : rows[i].title, author : rows[i].author, 
+		       	content : rows[i].content} 
+	   		}
+			res.render('index',{
+				lists : list,
+				status : req.signedCookies.login_status,
+				admin : req.cookies.admin,
+		});
+		}
+	})
 });
 
 //=================

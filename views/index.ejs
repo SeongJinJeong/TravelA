@@ -48,8 +48,16 @@
 				</ul>
 			</div>
 			<div id="wrapper">
-				<div id="content" onmouseover="this.style.backgroundimage='res/index_title.png';">
+				<div id="title" style="background-image: 'res/index_title.png'">
 					<h1 onmouseover="this.style.color='blue';" onmouseleave="this.style.color='skyblue';"> Welcome to Travel Anywhere!! </h1>
+				</div>
+				<div id="contents">
+					<div id="lists">
+						<% for(var i=0; i< lists.length;i++){ %>
+						<div id='list_title'><a href="/writings?which=<%=lists[i].title %>&before=community"><%= lists[i].title %></a></div>
+						<div id='list_content'><%- lists[i].content %></div>
+						<% } %>
+					</div>	
 				</div>
 			</div>
 		</div>
