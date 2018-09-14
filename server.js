@@ -222,6 +222,14 @@ app.get('/delete_server',function(req,res){
 })
 
 //===================
+
+//photo uploader
+
+app.post('/file_uploader',function(req,res){
+	res.redirect('/');
+})
+
+//=================
 app.listen(800,function(){
 	console.log("Server activated at 800 port!");
 });
