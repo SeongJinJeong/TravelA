@@ -2,6 +2,17 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const multer = require('multer');
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'views/uploads/');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  }),
+});
 
 const cookieParser = require('cookie-parser');
 
@@ -225,9 +236,22 @@ app.get('/delete_server',function(req,res){
 
 //photo uploader
 
-app.post('/file_uploader',function(req,res){
-	res.redirect('/');
-})
+//=================
+
+
+//Test
+
+app.get('/upload_test',function(req,res){
+	res.render('upload_test',{
+		status : req.signedCookies.login_status,
+		admin : req.cookies.admin,
+	});
+});
+
+app.post('/upload_test', upload.single('img'), function(req, res){
+  console.log(req.file); 
+  res.redirect('/');
+});
 
 //=================
 app.listen(800,function(){
