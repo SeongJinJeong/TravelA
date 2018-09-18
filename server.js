@@ -1,4 +1,6 @@
 const express = require('express');
+const app = express();
+const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
@@ -25,7 +27,6 @@ const conn = mysql.createConnection({
 });
 conn.connect();
 
-const app = express();
 var user_info = {
 	id : '',
 	pwd : '',
@@ -181,20 +182,22 @@ app.get('/write',function(req,res){
 	write_message = null;
 });
 
-app.post('/writing_server',function(req,res){
+app.post('/writing_server',upload.single('coverimage'),function(req,res){
 	var title = req.body.writing_title;
 	var author = req.body.author;
 	var contents = req.body.contents;
 	var user_id = req.body.user_id;
-	var sql = "insert into "+before_page+"(title,author,content,user_id) values(?,?,?,?)";
+	var coverimage = req.file.originalname;
+	var sql = "insert into "+before_page+"(title,author,content,user_id,coverimage) values(?,?,?,?,?)";
 	if(user_info.id != 'admin' && author.toLowerCase() === 'admin'){
 	    write_message = "You can't use admin NickName!";
 	    res.redirect('/write?before='+before_page);
 	} 
 	else {
-	    conn.query(sql,[title,author,contents,user_info.id],function(err,rows,fields){
+	    conn.query(sql,[title,author,contents,user_info.id,coverimage],function(err,rows,fields){
 	        if(err) console.log(err);
 	        else {
+	        	console.log(req.file);
 	            res.redirect('/menu/'+before_page);	
 	        }
 	    });
@@ -223,11 +226,20 @@ app.get('/delete_server',function(req,res){
 	var before_page = req.query.before;
 	var title = req.query.title;
 	var sql = 'delete from '+before_page+' where title=?';
-
-	conn.query(sql,[title],function(err,rows,fields){
+	conn.query('select * from '+before_page+' where title=?',[title],function(err,rows,fields){
 		if(err) console.log(err);
 		else {
-			res.redirect('/menu/'+before_page);
+			fs.unlink('views/uploads/'+rows[0].coverimage,function(err){
+				if(err) console.log(err);
+				else {
+					conn.query(sql,[title],function(err,rows,fields){
+						if(err) console.log(err);
+						else {
+							res.redirect('/menu/'+before_page);
+						}
+					})
+				}
+			})
 		}
 	})
 })
@@ -249,7 +261,7 @@ app.get('/upload_test',function(req,res){
 });
 
 app.post('/upload_test', upload.single('img'), function(req, res){
-  console.log(req.file); 
+  console.log(req.file.originalname); 
   res.redirect('/');
 });
 

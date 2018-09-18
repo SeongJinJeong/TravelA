@@ -41,7 +41,7 @@
 				<p id='meesage' style="color : red; text-align: center;"><%=message%></p>
 				<% } %>
 				<h1 id="Write">WRITING ON <%=menu%></h1>
-				<form action='/writing_server?before=<%=menu%>' id="frm" method="post">
+				<form action='/writing_server?before=<%=menu%>' id="frm" method="post" enctype="multipart/form-data">
 					<div id="writing_all">
 						<div id="writing_top">
 							<input type="text" size="100" id="writing_title" class="writing" name="writing_title" placeholder="Write Your Title">
@@ -64,6 +64,8 @@
 								
 							</script>
 						</div>
+						<span style="font-size: 15px; color: blue;">UPLOAD COVER PHOTO :  </span>
+						<input type="file" value="IMG UPLOAD" name="coverimage">
 						<div id="submit">
 							<button id="uploadButton">Upload</button>
 						</div>
@@ -83,7 +85,7 @@
 		var windowWidth = window.outerWidth;
 
 		$("body").css('width',windowWidth);
-		$("body").css('max-height',windowHeight*1.3)
+		$("body").css('max-height',windowHeight*1.5)
 
 		$("#main").css("height",windowHeight);
 		$("#main").css("width",windowWidth);

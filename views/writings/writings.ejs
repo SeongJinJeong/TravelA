@@ -46,13 +46,16 @@
 			</div>
 			<div id="wrapper">
 				<div id="content">
+					<div id="coverImage" style="float: left;">
+						<img src="../uploads/<%= lists.coverimage %>">
+					</div>
 					<div id="list_title">
 						Title : <%= lists.title %>
 					</div>
 					<div id="list_author">
 						Author : <%= lists.author %>
 					</div>
-					<div id="list_content" readonly="readonly" style="resize: none;"><%- lists.content %></div>
+					<div id="list_content" readonly="readonly" style="background-color: white;"><%- lists.content %></div>
 					<% if(admin){%>
 					<a href="/delete_server?before=<%=before%>&&title=<%=lists.title %>" style="margin-left: 47%; color: white;">DELETE</a>
 					<% } else if(user_id == writer) {%>
