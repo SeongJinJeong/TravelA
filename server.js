@@ -253,17 +253,6 @@ app.get('/delete_server',function(req,res){
 
 //Test
 
-app.get('/upload_test',function(req,res){
-	res.render('upload_test',{
-		status : req.signedCookies.login_status,
-		admin : req.cookies.admin,
-	});
-});
-
-app.post('/upload_test', upload.single('img'), function(req, res){
-  console.log(req.file.originalname); 
-  res.redirect('/');
-});
 
 //=================
 app.listen(800,function(){

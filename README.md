@@ -103,3 +103,63 @@ app.get('/',function(req,res){
 		status : req.signedCookies.login_status, //암호화가 되지 않은 쿠키는 res.cookies.login_status로 사용한다.
 		})
 	})
+```
+
+### 2. 이미지 업로드 하는 법!
+mysql과 multer 모듈을 사용해서 이미지를 업로드 하는법이다.
+먼저 multer 모듈과 mysql 모듈을 받아오고 html 혹은 ejs 등의 프론트에서 업로드할 수 있는 태그를 추가해 준다.
+#### EX)
+```javascript
+const mysql = require('mysql');			//  1
+const conn = mysql.createConnection({
+	host : 'localhost',
+	user : 'test',
+	password : '1234',
+	database : 'test',
+	multipleStatements: 'true'
+});
+conn.connect();
+
+const multer = require('multer');
+const upload = multer({					//  2
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'views/uploads/');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  }),
+});
+```
+```html
+<form action="/upload" method="post" enctype="multipart/form-data">
+	<input type="file" name="img">			//  3
+	<input type="submit">
+</form>
+```
+
+그리고 서버에서 프론트의 name 값을 받아서 잘 가공하면 된다.
+
+```javascript
+app.post('/upload',upload.single('img'),function(req,res){		//  4 ==> (upload.single(업로드 이미지의 name 값))
+	var coverimage = req.file.originalname;						//  5
+	var sql = "insert into "+before_page+"(title,author,content,user_id,coverimage) values(?,?,?,?,?)";
+	conn.query(sql,[title,author,contents,user_info.id,coverimage],function(err,rows,fields){		//  5
+	    if(err) console.log(err);
+	    else {
+	      	console.log(req.file);
+	        res.redirect('/menu/'+before_page);	
+	    }
+	});
+});
+```
+post의 가운데 upload.single을 통해 이미지를 지정했던 경로에 넣는다. 또한 req.file을 통해 파일의 세부사항을 가져올 수 있는데, req.file.originalname은 유저가 업로드한 이미지의 이름을 가져올 수 있다. 나는 이미지를 서버내 폴더의 경로에 집어넣었고, originalname을 데이터베이스에 넣어 이미지가 필요할 때 데이터베이스의 rows[0].coverimage를 통해 폴더에서 이미지를 찾아 가져올 수 있게 만들었다.
+
+#### 총 정리!
+1. mysql 모듈과 multer 모듈을 받아온다.
+2. multer 모듈의 속성을 정의해준다.
+3. name 값을 지정한 파일 업로드 input 태그를 만든다.
+4. 서버에서 upload.sigle을 통해 지정된 경로에 이미지를 넣는다.
+5. req.file.originalname 을 통해 데이터베이스에 이미지의 이름을 넣는다.
+6. 이미지를 찾을 떄는 데이터베이스의 이미지 이름을 통해 찾는다.
