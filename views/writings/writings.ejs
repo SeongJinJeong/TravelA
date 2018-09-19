@@ -46,8 +46,10 @@
 			</div>
 			<div id="wrapper">
 				<div id="content">
-					<div id="coverImage" style="float: left;">
-						<img src="../uploads/<%= lists.coverimage %>">
+					<div id="coverImage">
+						<% if(lists.coverimage) {%>
+							<img src="../uploads/<%= lists.coverimage %>">
+						<% } %>
 					</div>
 					<div id="list_title">
 						Title : <%= lists.title %>

@@ -173,7 +173,7 @@ var before_page;
 
 app.get('/write',function(req,res){
 	before_page = req.query.before;
-	res.render('buttons/write',{
+	res.render('writings/write',{
 		status : req.signedCookies.login_status,
 		menu : req.query.before,
 		user_id : user_info.id,
@@ -187,8 +187,13 @@ app.post('/writing_server',upload.single('coverimage'),function(req,res){
 	var author = req.body.author;
 	var contents = req.body.contents;
 	var user_id = req.body.user_id;
-	var coverimage = req.file.originalname;
-	var sql = "insert into "+before_page+"(title,author,content,user_id,coverimage) values(?,?,?,?,?)";
+	if(req.file){
+		var sql = "insert into "+before_page+"(title,author,content,user_id,coverimage) values(?,?,?,?,?)";
+		var coverimage = req.file.originalname;
+	}
+	else {
+		var sql = "insert into "+before_page+"(title,author,content,user_id) values(?,?,?,?);"
+	}
 	if(user_info.id != 'admin' && author.toLowerCase() === 'admin'){
 	    write_message = "You can't use admin NickName!";
 	    res.redirect('/write?before='+before_page);
@@ -197,7 +202,6 @@ app.post('/writing_server',upload.single('coverimage'),function(req,res){
 	    conn.query(sql,[title,author,contents,user_info.id,coverimage],function(err,rows,fields){
 	        if(err) console.log(err);
 	        else {
-	        	console.log(req.file);
 	            res.redirect('/menu/'+before_page);	
 	        }
 	    });
@@ -229,17 +233,28 @@ app.get('/delete_server',function(req,res){
 	conn.query('select * from '+before_page+' where title=?',[title],function(err,rows,fields){
 		if(err) console.log(err);
 		else {
-			fs.unlink('views/uploads/'+rows[0].coverimage,function(err){
-				if(err) console.log(err);
-				else {
-					conn.query(sql,[title],function(err,rows,fields){
+			fs.exists('views/uploads/'+rows[0].coverimage, (exists) => {
+			  	if (exists) {
+					fs.unlink('views/uploads/'+rows[0].coverimage,function(err){
+						if(err) console.log(err);
+						else {
+							conn.query(sql,[title],function(err,rows,fields){
+								if(err) console.log(err);
+								else {
+									res.redirect('/menu/'+before_page);
+								}
+							})
+						}
+					})
+			  	} else {
+			    	conn.query(sql,[title],function(err,rows,fields){
 						if(err) console.log(err);
 						else {
 							res.redirect('/menu/'+before_page);
 						}
 					})
-				}
-			})
+			  	}
+			});
 		}
 	})
 })
