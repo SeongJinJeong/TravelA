@@ -31,7 +31,7 @@ body {
 
 ```javascript
 var winWidth = window.outerWidth;
-var winHeight = widow.outerHeight;
+var winHeight = window.outerHeight;
 
 $('body').css('min-height',winHeight);
 $('body').css('min-width',winWidth);
@@ -163,3 +163,18 @@ post의 가운데 upload.single을 통해 이미지를 지정했던 경로에 �
 4. 서버에서 upload.sigle을 통해 지정된 경로에 이미지를 넣는다.
 5. req.file.originalname 을 통해 데이터베이스에 이미지의 이름을 넣는다.
 6. 이미지를 찾을 떄는 데이터베이스의 이미지 이름을 통해 찾는다.
+
+
+## EJS
+ejs는 node.js의 템플릿 엔진중 하나로 그 외에는 jade 등이 있다. 내가 jade 대신 ejs를 택한 이유는 jade는 html문법과 달라 내가 이미 만들어둔 html파일이 있으면 그것을 jade로 새로 만들어야 하고, 또한 jade의 문법을 배우기 귀찮았기에 기본 html 문법을 사용하는 템플릿 엔진인 ejs를 선택했다. (어디서 들었는데 jade는 혼자 작업하기 적합하고, ejs는 여러 팀원과 작업하기 적합하다고 했다.)
+내가 쓰고 있는 기본적인 ejs 문법은 다음과 같다.
+```ejs
+1.  <% javascript %>
+2.  <%= 변수 %>
+3.  <%- 변수(html) %>
+```
+1. 1번은 html안에 틈틈히 자바스크립트를 이용해 여러 동적인 기능을 할 때 사용된다.
+
+2. 2번은 서버에서 어떤 값을 받아올때 쓰는데 예를 들어 서버에서 사용자의 이름(userName)을 변수로 넘겨받는다면 <%= userName %> 과 같이 받아올 수 있다.
+
+3. 3번은 2번의 응용으로 쓸 수 있는데, 서버에서 받는 값이 html코드면 2번이 아닌 3번을 써야 html코드가 적용된다.
