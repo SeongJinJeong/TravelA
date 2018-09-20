@@ -46,16 +46,16 @@
 			</div>
 			<div id="wrapper">
 				<div id="content">
-					<div id="coverImage">
-						<% if(lists.coverimage) {%>
+					<% if(lists.coverimage) {%>
+						<div id="coverImage">
 							<img src="../uploads/<%= lists.coverimage %>">
-						<% } %>
-					</div>
+						</div>
+					<% } %>
 					<div id="list_title">
-						Title : <%= lists.title %>
+						TITLE : <%= lists.title %>
 					</div>
 					<div id="list_author">
-						Author : <%= lists.author %>
+						AUTHOR : <%= lists.author %>
 					</div>
 					<div id="list_content" readonly="readonly" style="background-color: white;"><%- lists.content %></div>
 					<% if(admin){%>

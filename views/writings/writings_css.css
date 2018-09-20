@@ -159,28 +159,31 @@ a {
 
 	border : 1px solid black;
 
-	border-radius: 50px 50px 50px 50px;
-
 	background-color: dodgerblue;
 }
 
 #coverImage {
-	float: right;
+	margin: 0px;
+	margin-left: 50px;
+}
+
+#coverImage img {
+	min-width: 100px;
+	min-height: 100px;
+
+	margin: 0px;
 }
 
 #list_title {
-	border-bottom: 1px solid black;
-	border-top: 1px solid black;
+	border: 1px solid black;
 
 	padding : 5px;
-
-	margin-top: 50px;
 
 	background-color: #F8F8FF;
 }
 
 #list_author {
-	border-bottom: 1px solid black;
+	border: 1px solid black;
 
 	padding : 5px;
 
@@ -198,6 +201,9 @@ a {
 	background-color: #F8F8FF;
 }
 
+#list_content p {
+	margin: 0px;
+}
 /*----------------------------------------------*/
 
 
