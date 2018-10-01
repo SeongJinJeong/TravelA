@@ -45,12 +45,12 @@
 				</ul>
 			</div>
 			<div id="wrapper">
+				<% if(lists.coverimage) {%>
+					<div id="coverImage" style="max-width: 1023px; max-height: 500px;">
+						<img src="../uploads/<%= lists.coverimage %>">
+					</div>
+				<% } %>
 				<div id="content">
-					<% if(lists.coverimage) {%>
-						<div id="coverImage">
-							<img src="../uploads/<%= lists.coverimage %>">
-						</div>
-					<% } %>
 					<div id="list_title">
 						TITLE : <%= lists.title %>
 					</div>
@@ -79,8 +79,6 @@
 
 		$('body').css("width",windowWidth);
 		$("#wrapper").css("width",windowWidth*(8/10));
-
-		$("#content").css("min-height",windowHeight);
 
 		$("#lists").css("min-height",windowHeight);
 
